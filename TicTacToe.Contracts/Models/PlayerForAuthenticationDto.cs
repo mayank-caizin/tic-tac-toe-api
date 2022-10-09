@@ -6,12 +6,10 @@ using System.Threading.Tasks;
 
 namespace TicTacToe.Contracts
 {
-    public interface IPlayersRepository
+    public class PlayerForAuthenticationDto
     {
-        void AddPlayer(Player player);
+        public string Email { get; set; }
 
-        Task<Player> GetPlayer(string email);
-
-        Task<bool> SaveChangesAsync();
+        public string Password { get; set; }
     }
 }

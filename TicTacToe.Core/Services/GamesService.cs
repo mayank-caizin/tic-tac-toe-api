@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using TicTacToe.Contracts;
 
-namespace TicTacToe.Core.Services
+namespace TicTacToe.Core
 {
-    public class GamesService
+    public class GamesService : IGamesService
     {
         private readonly IGamesRepository _gamesRepository;
 

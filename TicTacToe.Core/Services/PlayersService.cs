@@ -7,13 +7,42 @@ using TicTacToe.Contracts;
 
 namespace TicTacToe.Core
 {
-    public class PlayersService
+    public class PlayersService : IPlayersService
     {
         private readonly IPlayersRepository _playersRepository;
 
         public PlayersService(IPlayersRepository playersRepository)
         {
             _playersRepository = playersRepository;
+        }
+
+        public async Task<Player> AddPlayer(PlayerForCreationDto playerCreationDto)
+        {
+            Player player = new Player()
+            {
+                Id = Convert.ToBase64String(Guid.NewGuid().ToByteArray()).Replace("=", "").Replace("+", "-").Replace("/", "_"),
+                Name = playerCreationDto.Name,
+                Email = playerCreationDto.Email,
+                Password = playerCreationDto.Password
+            };
+
+            _playersRepository.AddPlayer(player);
+
+            await _playersRepository.SaveChangesAsync();
+
+            return player;
+        }
+
+        public async Task<Player> AuthenticatePlayer(PlayerForAuthenticationDto playerForAuthenticationDto)
+        {
+            Player player = await _playersRepository.GetPlayer(playerForAuthenticationDto.Email);
+
+            if (player == null || player.Password != playerForAuthenticationDto.Password)
+            {
+                return null;
+            }
+
+            return player;
         }
     }
 }

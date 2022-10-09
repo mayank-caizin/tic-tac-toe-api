@@ -8,5 +8,6 @@ namespace TicTacToe.Contracts
 {
     public interface IGamesRepository
     {
+        Task<bool> SaveChangesAsync();
     }
 }

@@ -15,5 +15,11 @@ namespace TicTacToe.Data
         {
             _context = context;
         }
+
+        public async Task<bool> SaveChangesAsync()
+        {
+            // return true if 1 or more entities were changed
+            return (await _context.SaveChangesAsync() > 0);
+        }
     }
 }

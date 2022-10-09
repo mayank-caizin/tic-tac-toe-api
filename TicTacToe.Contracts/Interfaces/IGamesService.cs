@@ -6,12 +6,8 @@ using System.Threading.Tasks;
 
 namespace TicTacToe.Contracts
 {
-    public interface IPlayersRepository
+    public interface IGamesService
     {
-        void AddPlayer(Player player);
 
-        Task<Player> GetPlayer(string email);
-
-        Task<bool> SaveChangesAsync();
     }
 }

@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using TicTacToe.Contracts;
+using TicTacToe.Core;
 using TicTacToe.Data;
 
 namespace TicTacToe.Web
@@ -16,6 +18,12 @@ namespace TicTacToe.Web
             // builder.Services.AddDbContext<TicTacToeContext>(options => options.UseInMemoryDatabase("TicTacToeDb"));
             builder.Services.AddDbContext<TicTacToeContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("TicTacToeDbConnectionString")));
+
+            builder.Services.AddScoped<IPlayersRepository, PlayersRepository>();
+            builder.Services.AddScoped<IPlayersService, PlayersService>();
+
+            builder.Services.AddScoped<IGamesRepository, GamesRepository>();
+            builder.Services.AddScoped<IGamesService, GamesService>();
 
             var app = builder.Build();
 
