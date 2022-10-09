@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using TicTacToe.Data;
+
 namespace TicTacToe.Web
 {
     public class Program
@@ -9,6 +12,10 @@ namespace TicTacToe.Web
             // Add services to the container.
 
             builder.Services.AddControllers();
+
+            // builder.Services.AddDbContext<TicTacToeContext>(options => options.UseInMemoryDatabase("TicTacToeDb"));
+            builder.Services.AddDbContext<TicTacToeContext>(options =>
+            options.UseSqlServer(builder.Configuration.GetConnectionString("TicTacToeDbConnectionString")));
 
             var app = builder.Build();
 
