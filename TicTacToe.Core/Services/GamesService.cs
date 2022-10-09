@@ -18,12 +18,12 @@ namespace TicTacToe.Core
             _playersRepository = playersRepository;
         }
 
-        public async Task<Game> AddGame(string playerId, GameForCreationDto gameForCreationDto)
+        public async Task<Game> AddGame(string playerId, int gameMode)
         {
             Game game = new Game() {
                 Id = Convert.ToBase64String(Guid.NewGuid().ToByteArray()).Replace("=", "").Replace("+", "-").Replace("/", "_"),
                 XPlayerId = playerId,
-                GameMode = gameForCreationDto.GameMode
+                GameMode = gameMode
             };
             if(game.GameMode == (int)GameModes.AgainstComputer)
             {

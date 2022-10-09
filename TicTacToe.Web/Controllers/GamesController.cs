@@ -22,9 +22,9 @@ namespace TicTacToe.Web
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateGame([FromRoute] string playerId, [FromBody] GameForCreationDto gameForCreationDto)
+        public async Task<IActionResult> CreateGame([FromRoute] string playerId, [FromQuery] int gameMode)
         {
-            var gameEntity = await _gamesService.AddGame(playerId, gameForCreationDto);
+            var gameEntity = await _gamesService.AddGame(playerId, gameMode);
             return Ok(gameEntity);
         }
     }
