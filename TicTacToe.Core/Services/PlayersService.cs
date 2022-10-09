@@ -35,7 +35,7 @@ namespace TicTacToe.Core
 
         public async Task<Player> AuthenticatePlayer(PlayerForAuthenticationDto playerForAuthenticationDto)
         {
-            Player player = await _playersRepository.GetPlayer(playerForAuthenticationDto.Email);
+            Player player = await _playersRepository.GetPlayerByEmail(playerForAuthenticationDto.Email);
 
             if (player == null || player.Password != playerForAuthenticationDto.Password)
             {

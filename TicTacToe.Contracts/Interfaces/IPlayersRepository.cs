@@ -10,7 +10,9 @@ namespace TicTacToe.Contracts
     {
         void AddPlayer(Player player);
 
-        Task<Player> GetPlayer(string email);
+        Task<Player> GetPlayer(string id);
+
+        Task<Player> GetPlayerByEmail(string email);
 
         Task<bool> SaveChangesAsync();
     }

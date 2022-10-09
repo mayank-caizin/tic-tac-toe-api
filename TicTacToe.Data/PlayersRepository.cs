@@ -28,9 +28,14 @@ namespace TicTacToe.Data
             _context.Players.Add(player);
         }
 
-        public async Task<Player> GetPlayer(string email)
+        public async Task<Player> GetPlayerByEmail(string email)
         {
             return await _context.Players.FirstOrDefaultAsync(p => p.Email == email);
+        }
+
+        public async Task<Player> GetPlayer(string id)
+        {
+            return await _context.Players.FirstOrDefaultAsync(p => p.Id == id);
         }
 
         public async Task<bool> SaveChangesAsync()

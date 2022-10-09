@@ -8,6 +8,9 @@ namespace TicTacToe.Contracts
 {
     public interface IGamesRepository
     {
+        Task<IEnumerable<Game>> GetGamesAsync(string playerId);
+
+        void AddGame(Game game);
         Task<bool> SaveChangesAsync();
     }
 }
