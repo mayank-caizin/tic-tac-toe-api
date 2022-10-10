@@ -8,8 +8,10 @@ namespace TicTacToe.Contracts
 {
     public interface IPlayersService
     {
-        public Task<Player> AddPlayer(PlayerForCreationDto playerCreationDto);
+        bool PlayerExists(string playerId);
 
-        public Task<Player> AuthenticatePlayer(PlayerForAuthenticationDto playerForAuthenticationDto);
+        Task<Player> AddPlayer(PlayerForCreationDto playerCreationDto);
+
+        Task<Player> AuthenticatePlayer(PlayerForAuthenticationDto playerForAuthenticationDto);
     }
 }

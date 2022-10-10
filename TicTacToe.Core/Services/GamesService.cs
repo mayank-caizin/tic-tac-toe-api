@@ -39,6 +39,21 @@ namespace TicTacToe.Core
             return game;
         }
 
+        public async Task<Game> GetGameAsync(string playerId, string gameId)
+        {
+            if (playerId == "" || playerId == null)
+            {
+                throw new ArgumentNullException(nameof(playerId));
+            }
+
+            if (gameId == "" || gameId == null)
+            {
+                throw new ArgumentNullException(nameof(gameId));
+            }
+
+            return await _gamesRepository.GetGameAsync(playerId, gameId);
+        }
+
         public async Task<IEnumerable<Game>> GetGamesAsync(string playerId)
         {
             return await _gamesRepository.GetGamesAsync(playerId);

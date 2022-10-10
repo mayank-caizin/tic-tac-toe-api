@@ -28,6 +28,11 @@ namespace TicTacToe.Data
             _context.Players.Add(player);
         }
 
+        public bool PlayerExists(string playerId)
+        {
+            return _context.Players.Any(p => p.Id == playerId);
+        }
+
         public async Task<Player> GetPlayerByEmail(string email)
         {
             return await _context.Players.FirstOrDefaultAsync(p => p.Email == email);

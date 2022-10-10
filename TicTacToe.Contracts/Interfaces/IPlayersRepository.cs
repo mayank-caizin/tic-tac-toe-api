@@ -12,6 +12,8 @@ namespace TicTacToe.Contracts
 
         Task<Player> GetPlayer(string id);
 
+        bool PlayerExists(string playerId);
+
         Task<Player> GetPlayerByEmail(string email);
 
         Task<bool> SaveChangesAsync();

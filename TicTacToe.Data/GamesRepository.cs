@@ -27,6 +27,14 @@ namespace TicTacToe.Data
             _context.Games.Add(game);
         }
 
+        public async Task<Game> GetGameAsync(string playerId, string gameId)
+        {
+            Game? game = await _context.Games
+              .Where(g => g.XPlayerId == playerId && g.Id == gameId).FirstOrDefaultAsync();
+
+            return game;
+        }
+
         public async Task<IEnumerable<Game>> GetGamesAsync(string playerId)
         {
             if (playerId == "" || playerId == null)

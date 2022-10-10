@@ -16,6 +16,16 @@ namespace TicTacToe.Core
             _playersRepository = playersRepository;
         }
 
+        public bool PlayerExists(string playerId)
+        {
+            if (playerId == null)
+            {
+                throw new ArgumentNullException(nameof(playerId));
+            }
+
+            return _playersRepository.PlayerExists(playerId);
+        }
+
         public async Task<Player> AddPlayer(PlayerForCreationDto playerCreationDto)
         {
             Player player = new Player()

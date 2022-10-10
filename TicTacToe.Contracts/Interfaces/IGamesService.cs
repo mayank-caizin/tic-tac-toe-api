@@ -11,5 +11,7 @@ namespace TicTacToe.Contracts
         Task<IEnumerable<Game>> GetGamesAsync(string playerId);
 
         Task<Game> AddGame(string playerId, int gameMode);
+
+        Task<Game> GetGameAsync(string playerId, string gameId);
     }
 }
