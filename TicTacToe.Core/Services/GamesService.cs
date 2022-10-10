@@ -39,6 +39,15 @@ namespace TicTacToe.Core
             return game;
         }
 
+        public int GetBestMove(Game game)
+        {
+            char player = game.Xturn ? 'X' : 'O';
+
+            GameLogic gameLogic = new GameLogic(game.Board, player);
+
+            return gameLogic.FindBestMove();
+        }
+
         public async Task<Game> GetGameAsync(string playerId, string gameId)
         {
             if (playerId == "" || playerId == null)
@@ -57,6 +66,35 @@ namespace TicTacToe.Core
         public async Task<IEnumerable<Game>> GetGamesAsync(string playerId)
         {
             return await _gamesRepository.GetGamesAsync(playerId);
+        }
+
+        public async Task MakeMove(Game game, int index)
+        {
+            char toReplace = game.Xturn ? 'X' : 'O';
+            game.Board = game.Board.ReplaceAt(index, toReplace);
+            game.Xturn = !game.Xturn;
+
+            _gamesRepository.UpdateGame(game);
+
+            await _gamesRepository.SaveChangesAsync();
+        }
+
+        public async Task MakeMove(string playerId, string gameId, int index)
+        {
+            var game = await GetGameAsync(playerId, gameId);
+
+            if(game == null)
+            {
+                throw new ArgumentNullException(nameof(game));
+            }
+
+            char toReplace = game.Xturn ? 'X' : 'O';
+            game.Board = game.Board.ReplaceAt(index, toReplace);
+            game.Xturn = !game.Xturn;
+
+            _gamesRepository.UpdateGame(game);
+
+            await _gamesRepository.SaveChangesAsync();
         }
     }
 }

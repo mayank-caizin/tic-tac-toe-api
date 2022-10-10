@@ -51,5 +51,10 @@ namespace TicTacToe.Data
             // return true if 1 or more entities were changed
             return (await _context.SaveChangesAsync() > 0);
         }
+
+        public void UpdateGame(Game game)
+        {
+            // no code in this implementation
+        }
     }
 }

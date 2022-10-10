@@ -13,5 +13,11 @@ namespace TicTacToe.Contracts
         Task<Game> AddGame(string playerId, int gameMode);
 
         Task<Game> GetGameAsync(string playerId, string gameId);
+
+        int GetBestMove(Game game);
+
+        Task MakeMove(Game game, int index);
+
+        Task MakeMove(string playerId, string gameId, int index);
     }
 }

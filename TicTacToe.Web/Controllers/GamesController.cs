@@ -52,5 +52,57 @@ namespace TicTacToe.Web
 
             return Ok(game);
         }
+
+        [HttpGet("{gameId}/move")]
+        public async Task<IActionResult> GetMove([FromRoute] string playerId, [FromRoute] string gameId)
+        {
+            if (!_playersService.PlayerExists(playerId))
+            {
+                return NotFound();
+            }
+
+            var game = await _gamesService.GetGameAsync(playerId, gameId);
+
+            if (game == null)
+            {
+                return NotFound();
+            }
+
+            int moveIndex = _gamesService.GetBestMove(game);
+
+            return Ok(moveIndex);
+        }
+
+        [HttpPatch("{gameId}")]
+        public async Task<IActionResult> MakeMove([FromRoute] string playerId, [FromRoute] string gameId, [FromBody] int index)
+        {
+            if(index > 8)
+            {
+                return BadRequest("Invalid Move");
+            }
+
+            if (!_playersService.PlayerExists(playerId))
+            {
+                return NotFound();
+            }
+
+            var game = await _gamesService.GetGameAsync(playerId, gameId);
+
+            if (game == null)
+            {
+                return NotFound();
+            }
+
+            if (game.Board[index] != '-')
+            {
+                return BadRequest("invalid move");
+            }
+
+            await _gamesService.MakeMove(game, index);
+
+            // await _gamesService.MakeMove(playerId, gameId, index);
+
+            return NoContent();
+        }
     }
 }
