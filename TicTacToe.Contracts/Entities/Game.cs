@@ -29,6 +29,6 @@ namespace TicTacToe.Contracts
         public string OPlayerId { get; set; }
 
 
-        public string Winner { get; set; } = "";
+        public string Result { get; set; } = "";
     }
 }
