@@ -1,4 +1,6 @@
-﻿namespace TicTacToe.Web
+﻿using TicTacToe.Contracts;
+
+namespace TicTacToe.Web
 {
     public class PlayerDto
     {

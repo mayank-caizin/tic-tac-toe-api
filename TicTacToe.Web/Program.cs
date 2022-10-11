@@ -9,7 +9,19 @@ namespace TicTacToe.Web
     {
         public static void Main(string[] args)
         {
+            var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                                  policy =>
+                                  {
+                                      policy.AllowAnyOrigin()
+                                            .AllowAnyHeader()
+                                            .AllowAnyMethod();
+                                  });
+            });
 
             // Add services to the container.
 
@@ -29,10 +41,14 @@ namespace TicTacToe.Web
 
             // Configure the HTTP request pipeline.
 
+
             app.UseHttpsRedirection();
+            app.UseStaticFiles();
+            app.UseRouting();
+
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 

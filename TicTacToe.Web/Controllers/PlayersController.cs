@@ -18,10 +18,10 @@ namespace TicTacToe.Web
         public async Task<IActionResult> CreatePlayer(PlayerForCreationDto player)
         {
             var playerEntity = await _playersService.AddPlayer(player);
-            return Ok(playerEntity);
+            return Ok(playerEntity.Translate());
         }
 
-        [HttpPost("login")]
+        [HttpPost("authenticate")]
         public async Task<IActionResult> LogInPlayer(PlayerForAuthenticationDto playerDetails)
         {
             var playerEntity = await _playersService.AuthenticatePlayer(playerDetails);
@@ -31,7 +31,7 @@ namespace TicTacToe.Web
                 return NotFound("Login Failed");
             }
 
-            return Ok(playerEntity);
+            return Ok(playerEntity.Translate());
         }
     }
 }

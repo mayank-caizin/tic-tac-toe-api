@@ -18,8 +18,4 @@
     <ProjectReference Include="..\TicTacToe.Data\TicTacToe.Data.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Translators\" />
-  </ItemGroup>
-
 </Project>
