@@ -51,7 +51,7 @@ namespace TicTacToe.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Xturn")
+                    b.Property<bool>("XTurn")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");

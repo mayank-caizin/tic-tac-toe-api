@@ -19,5 +19,7 @@ namespace TicTacToe.Contracts
         Task MakeMove(Game game, int index);
 
         Task MakeMove(string playerId, string gameId, int index);
+
+        Task DeleteGame(Game game);
     }
 }

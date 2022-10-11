@@ -8,13 +8,13 @@ namespace TicTacToe.Contracts
         [Key]
         public string Id { get; set; }
 
-        public string Board { get; set; } = "---------";
+        public string Board { get; set; } = "_________";
 
         public int GameMode { get; set; } = 1;
 
         public bool IsComplete { get; set; }
 
-        public bool Xturn { get; set; } = true;
+        public bool XTurn { get; set; } = true;
 
         //[ForeignKey("XPlayerId")]
         //public Player XPlayer { get; set; }

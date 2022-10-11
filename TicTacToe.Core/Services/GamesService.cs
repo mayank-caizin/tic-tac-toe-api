@@ -41,7 +41,7 @@ namespace TicTacToe.Core
 
         public int GetBestMove(Game game)
         {
-            char player = game.Xturn ? 'X' : 'O';
+            char player = game.XTurn ? 'X' : 'O';
 
             GameLogic gameLogic = new GameLogic(game.Board, player);
 
@@ -70,9 +70,9 @@ namespace TicTacToe.Core
 
         public async Task MakeMove(Game game, int index)
         {
-            char toReplace = game.Xturn ? 'X' : 'O';
+            char toReplace = game.XTurn ? 'X' : 'O';
             game.Board = game.Board.ReplaceAt(index, toReplace);
-            game.Xturn = !game.Xturn;
+            game.XTurn = !game.XTurn;
 
             _gamesRepository.UpdateGame(game);
 
@@ -88,12 +88,18 @@ namespace TicTacToe.Core
                 throw new ArgumentNullException(nameof(game));
             }
 
-            char toReplace = game.Xturn ? 'X' : 'O';
+            char toReplace = game.XTurn ? 'X' : 'O';
             game.Board = game.Board.ReplaceAt(index, toReplace);
-            game.Xturn = !game.Xturn;
+            game.XTurn = !game.XTurn;
 
             _gamesRepository.UpdateGame(game);
 
+            await _gamesRepository.SaveChangesAsync();
+        }
+
+        public async Task DeleteGame(Game game)
+        {
+            _gamesRepository.DeleteGame(game);
             await _gamesRepository.SaveChangesAsync();
         }
     }

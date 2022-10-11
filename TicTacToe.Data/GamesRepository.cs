@@ -56,5 +56,10 @@ namespace TicTacToe.Data
         {
             // no code in this implementation
         }
+
+        public void DeleteGame(Game game)
+        {
+            _context.Games.Remove(game);
+        }
     }
 }

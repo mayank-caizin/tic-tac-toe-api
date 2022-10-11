@@ -2,7 +2,7 @@
 
 namespace TicTacToe.Web
 {
-    public static class BookTranslator
+    public static class PlayerTranslator
     {
         public static PlayerDto Translate(this Player player)
         {

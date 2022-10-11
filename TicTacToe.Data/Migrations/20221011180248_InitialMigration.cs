@@ -4,7 +4,7 @@
 
 namespace TicTacToe.Data.Migrations
 {
-    public partial class Inital : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -30,7 +30,7 @@ namespace TicTacToe.Data.Migrations
                     Board = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     GameMode = table.Column<int>(type: "int", nullable: false),
                     IsComplete = table.Column<bool>(type: "bit", nullable: false),
-                    Xturn = table.Column<bool>(type: "bit", nullable: false),
+                    XTurn = table.Column<bool>(type: "bit", nullable: false),
                     XPlayerId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     OPlayerId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Winner = table.Column<string>(type: "nvarchar(max)", nullable: false),

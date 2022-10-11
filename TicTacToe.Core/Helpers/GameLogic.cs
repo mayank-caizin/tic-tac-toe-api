@@ -50,7 +50,7 @@ namespace TicTacToe.Core
             for(int i = 0; i < 3; i++)
                 for(int j = 0; j < 3; j++)
                 {
-                    if (board[i, j] == '-')
+                    if (board[i, j] == '_')
                         return true;
                 }
             return false;
@@ -124,13 +124,13 @@ namespace TicTacToe.Core
                 {
                     for(int j = 0; j < 3; j++)
                     {
-                        if (board[i, j] == '-')
+                        if (board[i, j] == '_')
                         {
                             board[i, j] = player;
 
                             best = Math.Max(best, MiniMax(depth + 1, !isMax));
 
-                            board[i, j] = '-';
+                            board[i, j] = '_';
                         }
                     }
                 }
@@ -145,13 +145,13 @@ namespace TicTacToe.Core
                 {
                     for(int j = 0; j < 3; j++)
                     {
-                        if (board[i, j] == '-')
+                        if (board[i, j] == '_')
                         {
                             board[i, j] = opponent;
 
                             best = Math.Min(best, MiniMax(depth + 1, !isMax));
 
-                            board[i, j] = '-';
+                            board[i, j] = '_';
                         }
                     }
                 }
@@ -169,13 +169,13 @@ namespace TicTacToe.Core
             {
                 for(int j = 0; j < 3; j++)
                 {
-                    if (board[i, j] == '-')
+                    if (board[i, j] == '_')
                     {
                         board[i, j] = player;
 
                         int moveVal = MiniMax(0, false);
 
-                        board[i, j] = '-';
+                        board[i, j] = '_';
 
                         if(moveVal > bestVal)
                         {

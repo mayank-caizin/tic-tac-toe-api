@@ -11,8 +11,8 @@ using TicTacToe.Data;
 namespace TicTacToe.Data.Migrations
 {
     [DbContext(typeof(TicTacToeContext))]
-    [Migration("20221009123049_Inital")]
-    partial class Inital
+    [Migration("20221011180248_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -53,7 +53,7 @@ namespace TicTacToe.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Xturn")
+                    b.Property<bool>("XTurn")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");

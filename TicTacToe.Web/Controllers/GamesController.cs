@@ -93,7 +93,7 @@ namespace TicTacToe.Web
                 return NotFound();
             }
 
-            if (game.Board[index] != '-')
+            if (game.Board[index] != '_')
             {
                 return BadRequest("invalid move");
             }
@@ -101,6 +101,26 @@ namespace TicTacToe.Web
             await _gamesService.MakeMove(game, index);
 
             // await _gamesService.MakeMove(playerId, gameId, index);
+
+            return NoContent();
+        }
+
+        [HttpDelete("{gameId}")]
+        public async Task<IActionResult> DeleteGame([FromRoute] string playerId, [FromRoute] string gameId)
+        {
+            if (!_playersService.PlayerExists(playerId))
+            {
+                return NotFound();
+            }
+
+            var game = await _gamesService.GetGameAsync(playerId, gameId);
+
+            if (game == null)
+            {
+                return NotFound();
+            }
+
+            await _gamesService.DeleteGame(game);
 
             return NoContent();
         }
