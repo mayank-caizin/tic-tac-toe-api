@@ -25,6 +25,12 @@ namespace TicTacToe.Core
                 XPlayerId = playerId,
                 GameMode = gameMode
             };
+
+            if(game.GameMode == (int) GameModes.Local)
+            {
+                game.OPlayerId = playerId;
+            }
+
             if(game.GameMode == (int)GameModes.AgainstComputer)
             {
                 game.OPlayerId = "computer";
