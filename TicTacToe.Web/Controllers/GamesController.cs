@@ -53,6 +53,47 @@ namespace TicTacToe.Web
             return Ok(game);
         }
 
+        [HttpPut("{gameId}")]
+        public async Task<IActionResult> UpdateGame([FromRoute] string playerId, [FromRoute] string gameId, [FromBody] Game gameToUpdate)
+        {
+            if (!_playersService.PlayerExists(playerId))
+            {
+                return NotFound();
+            }
+
+            var game = await _gamesService.GetGameAsync(playerId, gameId);
+
+            if (game == null)
+            {
+                return NotFound();
+            }
+
+            await _gamesService.UpdateGame(game, gameToUpdate);
+
+            return NoContent();
+        }
+
+        [HttpDelete("{gameId}")]
+        public async Task<IActionResult> DeleteGame([FromRoute] string playerId, [FromRoute] string gameId)
+        {
+            if (!_playersService.PlayerExists(playerId))
+            {
+                return NotFound();
+            }
+
+            var game = await _gamesService.GetGameAsync(playerId, gameId);
+
+            if (game == null)
+            {
+                return NotFound();
+            }
+
+            await _gamesService.DeleteGame(game);
+
+            return NoContent();
+        }
+
+        /*
         [HttpGet("{gameId}/move")]
         public async Task<IActionResult> GetMove([FromRoute] string playerId, [FromRoute] string gameId)
         {
@@ -76,7 +117,7 @@ namespace TicTacToe.Web
         [HttpPatch("{gameId}")]
         public async Task<IActionResult> MakeMove([FromRoute] string playerId, [FromRoute] string gameId, [FromBody] int index)
         {
-            if(index > 8)
+            if (index > 8)
             {
                 return BadRequest("Invalid Move");
             }
@@ -104,25 +145,6 @@ namespace TicTacToe.Web
 
             return NoContent();
         }
-
-        [HttpDelete("{gameId}")]
-        public async Task<IActionResult> DeleteGame([FromRoute] string playerId, [FromRoute] string gameId)
-        {
-            if (!_playersService.PlayerExists(playerId))
-            {
-                return NotFound();
-            }
-
-            var game = await _gamesService.GetGameAsync(playerId, gameId);
-
-            if (game == null)
-            {
-                return NotFound();
-            }
-
-            await _gamesService.DeleteGame(game);
-
-            return NoContent();
-        }
+        */
     }
 }

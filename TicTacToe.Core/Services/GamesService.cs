@@ -39,15 +39,6 @@ namespace TicTacToe.Core
             return game;
         }
 
-        public int GetBestMove(Game game)
-        {
-            char player = game.XTurn ? 'X' : 'O';
-
-            GameLogic gameLogic = new GameLogic(game.Board, player);
-
-            return gameLogic.FindBestMove();
-        }
-
         public async Task<Game> GetGameAsync(string playerId, string gameId)
         {
             if (playerId == "" || playerId == null)
@@ -68,6 +59,34 @@ namespace TicTacToe.Core
             return await _gamesRepository.GetGamesAsync(playerId);
         }
 
+        public async Task UpdateGame(Game game, Game gameToUpdate)
+        {
+            game.Result = gameToUpdate.Result;
+            game.XTurn = gameToUpdate.XTurn;
+            game.Board = gameToUpdate.Board;
+            game.IsComplete = gameToUpdate.IsComplete;
+
+            _gamesRepository.UpdateGame(game);
+
+            await _gamesRepository.SaveChangesAsync();
+        }
+
+        public async Task DeleteGame(Game game)
+        {
+            _gamesRepository.DeleteGame(game);
+            await _gamesRepository.SaveChangesAsync();
+        }
+
+        /*
+        public int GetBestMove(Game game)
+        {
+            char player = game.XTurn ? 'X' : 'O';
+
+            GameLogic gameLogic = new GameLogic(game.Board, player);
+
+            return gameLogic.FindBestMove();
+        }
+
         public async Task MakeMove(Game game, int index)
         {
             char toReplace = game.XTurn ? 'X' : 'O';
@@ -83,7 +102,7 @@ namespace TicTacToe.Core
         {
             var game = await GetGameAsync(playerId, gameId);
 
-            if(game == null)
+            if (game == null)
             {
                 throw new ArgumentNullException(nameof(game));
             }
@@ -96,11 +115,6 @@ namespace TicTacToe.Core
 
             await _gamesRepository.SaveChangesAsync();
         }
-
-        public async Task DeleteGame(Game game)
-        {
-            _gamesRepository.DeleteGame(game);
-            await _gamesRepository.SaveChangesAsync();
-        }
+        */
     }
 }
