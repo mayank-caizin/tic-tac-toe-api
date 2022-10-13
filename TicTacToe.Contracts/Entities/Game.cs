@@ -16,8 +16,8 @@ namespace TicTacToe.Contracts
 
         public bool XTurn { get; set; } = true;
 
-        [ForeignKey("XPlayerId")]
-        public Player Creator { get; set; }
+        //[ForeignKey("XPlayerId")]
+        //public Player XPlayer { get; set; }
 
         //[ForeignKey("OPlayerId")]
         //public Player OPlayer { get; set; }
